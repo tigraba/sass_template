@@ -1,0 +1,39 @@
+//
+// Clearer is used to force clear floating elements
+// http://css-tricks.com/snippets/css/clear-fix/
+// Use 1)
+// 		@include clearer();
+// 
+// Use 2)
+// 		@extend %clearer;
+//
+
+@mixin clearer(){
+	@if $vendor == ms {
+		zoom: 1;
+		
+		&:before, &:after {
+			content: "";
+		    display: table;
+		}
+		
+		&:after {
+		    clear: both;
+		}
+	} 
+	
+	@else {	
+	
+		&:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+		
+	}
+}
+
+
+%clearer {
+	@include clearer();
+}

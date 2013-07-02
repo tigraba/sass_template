@@ -1,0 +1,35 @@
+
+	//prefixer can work with any css, even if its weird
+	// see generated .css files
+	//
+	// @include prefixer(opacity, 0.5);
+	// will create -moz-opacity: 0.5; -webkit-opacity: 0.5;
+
+@mixin prefixer($property, $value, $split: true) {	
+	
+	@if $split {
+		@if $vendor == webkit {
+			-webkit-#{$property}: $value;
+		}
+		@else if $vendor == moz {
+			-moz-#{$property}: $value;
+		}
+		@else if $vendor == o {
+			-o-#{$property}: $value;
+		}
+		@else if $vendor == ms {
+			-ms-#{$property}: $value;
+		}
+		
+		#{$property}: $value;
+	}
+	
+	@else {		
+		-webkit-#{$property}: $value;
+		-moz-#{$property}: $value;
+		-o-#{$property}: $value;
+		-ms-#{$property}: $value;
+		#{$property}: $value; 
+	}
+}
+

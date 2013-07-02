@@ -1,0 +1,41 @@
+//
+// :after support for IE7
+// http://stackoverflow.com/questions/4181884/after-and-before-css-pseudo-elements-hack-for-ie-7
+//
+
+@mixin pseudo($placement, $content: ""){
+
+	@if $vendor == ms {
+		@if $placement == before {
+			*zoom: expression(
+	        	this.runtimeStyle.zoom="1",
+				this.obj = document.createElement("div"),
+				this.obj.innerHTML="#{$content}",
+		        this.insertBefore(
+		            obj,
+		            this.childNodes[0]
+		        ).className="#{$placement}"
+		    );
+	    } @else {
+		    *zoom: expression(
+		        this.runtimeStyle.zoom="1",
+		        this.obj = document.createElement("div"),
+		        this.obj.innerHTML="#{$content}", 
+		        
+		        this.appendChild(
+		            obj
+		        ).className="#{$placement}"
+		    );
+	    }
+		&:#{$placement}, .#{$placement} {
+			content: $content;
+			@content;
+		}
+		
+	} @else {
+		&:#{$placement} {
+			content: $content;
+			@content;
+		}
+	}
+}
