@@ -1,6 +1,7 @@
 @import "_prefix.scss";
 @import "_clearer.scss";
 @import "_pseudo.scss";
+@import "_fonts.scss";
 
 
 //--
@@ -37,6 +38,18 @@ div.mysprite {
 	@include use-sprite(login);
 }
 
+div.icon-test {
+	@include pseudo(before) {
+		//background: red;
+		//width: 150px;
+		//height: 50px;
+		
+		//@include use-sprite(more);
+		
+		//display: inline-block; zoom: 1; *display: inline;
+	}		
+}
+ 
 div.sprite2 {
 	@include pseudo(before) {
 		background: red;
@@ -44,6 +57,18 @@ div.sprite2 {
 		height: 50px;
 		
 		@include use-sprite(more);
+		
+		display: inline-block; zoom: 1; *display: inline;
+	}	
+}
+
+div.textual-icon {
+	@include pseudo(before, "1") {
+		background: red;
+		width: 150px;
+		height: 50px;
+		
+		@extend .font-icon;
 		
 		display: inline-block; zoom: 1; *display: inline;
 	}	

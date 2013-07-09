@@ -5,7 +5,7 @@
 
 @mixin pseudo($placement, $content: ""){
 
-	@if $vendor == ms {
+	@if $vendor == ms and $version < 8 {
 		@if $placement == before {
 			*zoom: expression(
 	        	this.runtimeStyle.zoom="1",

@@ -1,0 +1,13 @@
+/*
+
+layout/
+  - The rough outline of the site structure.
+  - Not "layout" as a set of properties excluding type, "layout" as the overall site template which might well include typography. 
+  - e.g. _banner, _nav, _main, _contentinfo, etc.
+
+*/
+
+@import "_header.scss";
+@import "_nav.scss";
+@import "_sidenav.scss";
+@import "_footer.scss";
