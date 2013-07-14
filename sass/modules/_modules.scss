@@ -5,3 +5,94 @@ modules/
   - e.g. _users, _admin, _product-lists etc.
 
 */
+
+div {
+	margin-bottom: 20px;
+	width: 100px;
+	height: 100px;
+	background: red;
+}
+div.round-corner {
+	@include border-radius(20px 0px 20px 0);
+}
+div.box-shadow {
+	$x: 10px;
+	$y: 10px;
+	$blur: 10px;
+	box-shadow: 10px 10px 10px black;
+	behavior: url("js/pie/PIE.php");
+}
+div.opaque {
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+}
+
+/*
+$e: 2.71828182845904523536028747135266249775724709369995;
+@function exponent() {
+  // reset value
+  $value: $base;
+  // positive intergers get multiplied
+  @if $exponent > 1 {
+    @for $i from 2 through $exponent {
+      $value: $value * $base; } }
+  // negitive intergers get divided. A number divided by itself is 1
+  @if $exponent < 1 {
+    @for $i from 0 through -$exponent {
+      $value: $value / $base; } }
+  // return the last value written
+  //@return $value; 
+}
+*/
+
+//==================
+
+@mixin rotate($angle: 0){
+	@if $vendor != ms {
+		@include prefixer(transform, rotate(#{$angle}deg))
+	} @else if $version > 8 {
+		@include prefixer(transform, rotate(#{$angle}deg))
+	} @else {
+	
+		//calculate IE filter matrix
+		$deg2radians: pi() * 2 / 360;
+		$rad: $angle * $deg2radians;
+		$costheta: cos($rad);
+		$sintheta: sin($rad);
+		
+		$m11: $costheta;
+		$m12: $sintheta * -1;
+    	$m21: $sintheta;
+    	$m22: $costheta;
+	
+		filter: progid:DXImageTransform.Microsoft.Matrix(M11=#{$m11}, M12=#{$m12}, M21=#{$m21}, M22=#{$m22}, SizingMethod="auto expand");
+		
+	}
+}
+
+div.rotate {
+	@include rotate(10);
+}
+
+/*
+
+@function exponent($base, $exponent) {
+  // reset value
+  $value: $base;
+  // positive intergers get multiplied
+  @if $exponent > 1 {
+    @for $i from 2 through $exponent {
+      $value: $value * $base; } }
+  // negitive intergers get divided. A number divided by itself is 1
+  @if $exponent < 1 {
+    @for $i from 0 through -$exponent {
+      $value: $value / $base; } }
+  // return the last value written
+  @return $value; 
+}
+@function sinh($number) {
+  $top: exponent($e, (2 * $number)) - 1;
+  $bottom: 2 * exponent($e, $number);
+  @return  $top / $bottom;
+}
+*/

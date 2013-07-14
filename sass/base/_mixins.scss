@@ -4,3 +4,12 @@ base/_mixins.scss
   - Our own custom set of mixins.
 
 */
+
+@mixin border-radius($rad){
+	
+	border-radius: $rad;
+	
+	@if $vendor == ms and $version < 9 {
+		behavior: url("js/pie/PIE.php");
+	}
+}
